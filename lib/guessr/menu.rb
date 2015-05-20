@@ -1,3 +1,4 @@
+
 module Guessr
   class Menu
     def initialize
@@ -50,8 +51,17 @@ module Guessr
       end
     end
 
+    def scoreboard
+      puts "High Scores"
+      Guessr::Player.order(score: :desc).each do |player|
+        puts "#{player.name} - #{player.score}"
+      end
+      puts
+    end
+
     def run
       welcome
+      scoreboard
       choose_player
       while play_again?
         choose_game
